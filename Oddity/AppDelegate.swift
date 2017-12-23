@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        FirebaseApp.configure()
+        let authHandle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user == nil {
+                print("USR NIL")
+                
+                let storyboard = UIStoryboard(name: "Login", bundle: nil)
+                
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+                
+                self.window?.rootViewController = initialViewController
+                self.window?.makeKeyAndVisible()
+                //keep the regular login flow
+            } else {
+                print("USR EXIST")
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "HomeNavVC")
+                
+                self.window?.rootViewController = initialViewController
+                self.window?.makeKeyAndVisible()
+            }
+        }
         return true
     }
 
