@@ -9,9 +9,13 @@
 import UIKit
 import Firebase
 import Spring
+import ChameleonFramework
 
 class HomeViewController: UIViewController, UITextViewDelegate {
 
+    @IBOutlet var unreadLabel: UILabel!
+    @IBOutlet var unreadWrapper: SpringView!
+    @IBOutlet var unreadCard: RoundedView!
     @IBOutlet var cardWrapper: SpringView!
     var ref:DatabaseReference!
     var chosenMid:String?
@@ -19,6 +23,7 @@ class HomeViewController: UIViewController, UITextViewDelegate {
     var opponentId:String?
     var opponentHandle:String?
     var userHandle = ""
+    var curUnread = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +32,48 @@ class HomeViewController: UIViewController, UITextViewDelegate {
         self.hideKeyboardWhenTappedAround()
         self.cardView.contentMode = UIViewContentMode.redraw
         self.cardView.setNeedsDisplay()
+        setColors()
         cardWrapper.animate()
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+        unreadCard.isHidden = true
+        setUnreadListener()
     }
     
+    func setUnreadListener() {
+        //let statusRef = self.ref.child("matches").child(mid).child("status")
+        let uid = Auth.auth().currentUser?.uid
+        ref.child("/users/\(uid ?? "")/unread").observe(DataEventType.value, with: { (snapshot) in
+            let unread = snapshot.value as? Int ?? 0
+            //self.unreadCard.isHidden = unread == 0
+            if unread == 0 {
+                self.unreadWrapper.animation = "fall"
+                self.unreadWrapper.duration = 2.0
+                self.unreadWrapper.animate()
+                //self.unreadCard.isHidden = true
+            } else if self.curUnread == 0 {
+                    self.unreadCard.isHidden = false
+                self.unreadWrapper.duration = 2.0
+                    self.unreadWrapper.animation = "fadeInUp"
+                   self.unreadWrapper.animate()
+            } else if unread > self.curUnread {
+                    self.unreadWrapper.animation = "flash"
+                    self.unreadWrapper.duration = 0.5
+            }
+            self.curUnread = unread
+            print("UNREAD:", unread)
+            self.unreadLabel.text = "You have \(unread) pending Odds"
+        })
+    }
+    
+    func setColors() {
+        self.view.backgroundColor = UIColor(gradientStyle:UIGradientStyle.topToBottom, withFrame:view.frame, andColors:[UIColor.Primary.bgGradTop, UIColor.Primary.bgGradBot])
+        goButton.backgroundColor = UIColor.Primary.buttonPrimary
+        goButton.setTitleColor(UIColor.Primary.title, for: .normal)
+        openButton.backgroundColor = UIColor.Primary.buttonSecondary
+        openButton.setTitleColor(UIColor.Primary.title, for: .normal)
+    }
+    
+    @IBOutlet var goButton: RoundButton!
+    @IBOutlet var openButton: RoundButton!
     @IBOutlet var cardView: RoundedView!
     @IBOutlet var taskView: UITextViewFixed!
     @IBOutlet var handleField: UITextField!
@@ -66,6 +107,13 @@ class HomeViewController: UIViewController, UITextViewDelegate {
         performSegue(withIdentifier: "BackToLogin", sender: self)
     }
     
+    @IBAction func openUnreadPress(_ sender: Any) {
+        if let par = parent as? PagesViewController {
+            print("PARR")
+            par.jumpToHistory()
+        }
+    }
+    
     
     func getUserHandle(for id:String) {
         ref.child("users/\(id)/handle").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -96,20 +144,38 @@ class HomeViewController: UIViewController, UITextViewDelegate {
                     "task": task,
                     "status": 0,
                     "ismatch": false] as [String : Any]
-        let childUpdates = ["/matches/\(mid)": match,
-                            "/users/\(opponentId!)/matches/\(mid)": task,
-                            "/users/\(uid)/matches/\(mid)": task] as [String : Any]
-        ref.updateChildValues(childUpdates)
         
-        let statusRef = ref.child("matches").child(mid).child("status")
-        statusRef.observe(DataEventType.value, with: { (snapshot) in
-            let stat = snapshot.value as? Int ?? -1
-            if stat >= 0 {
-                self.chosenMid = mid
-                self.performSegue(withIdentifier: "showOddsDetail", sender: self)
-            }
+        //Get the other user's unread count and add to it
+        ref.child("/users/\(opponentId!)/unread").observeSingleEvent(of: .value, with: { (snapshot) in
+            var unread = snapshot.value as? Int ?? 0
+            unread += 1
             
-        })
+            let childUpdates = ["/matches/\(mid)": match,
+                                "/users/\(self.opponentId!)/matches/\(mid)": task,
+                                "/users/\(uid)/matches/\(mid)": task,
+                                "/users/\(self.opponentId!)/unread":unread] as [String : Any]
+            self.ref.updateChildValues(childUpdates)
+            
+            let statusRef = self.ref.child("matches").child(mid).child("status")
+            statusRef.observe(DataEventType.value, with: { (snapshot) in
+                let stat = snapshot.value as? Int ?? -1
+                if stat >= 0 {
+                    self.chosenMid = mid
+                    self.handleField.text = ""
+                    self.taskView.text = ""
+                    if let placeholderLabel = self.taskView.viewWithTag(100) as? UILabel {
+                        placeholderLabel.isHidden = false
+                    }
+                    self.performSegue(withIdentifier: "showOddsDetail", sender: self)
+                }
+                
+            })
+            
+        }) { (error) in
+        }
+        
+        
+        
         
     }
 
@@ -120,8 +186,10 @@ class HomeViewController: UIViewController, UITextViewDelegate {
     
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? OddsMasterViewController {
-            dest.mid = self.chosenMid ?? ""
+        if let destNC = segue.destination as? UINavigationController {
+            if let dest = destNC.topViewController as? OddsMasterViewController {
+                dest.mid = self.chosenMid ?? ""
+            }
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
@@ -182,57 +250,11 @@ extension Date {
         return formatter.string(from: yourDate!)
     }
 }
-/*
-extension UIView {
-    @IBInspectable
-    var shadowRadius: CGFloat {
-        get {
-            return layer.shadowRadius
-        }
-        set {
-            layer.shadowRadius = newValue
-        }
-    }
-    
-    @IBInspectable
-    var shadowOpacity: Float {
-        get {
-            return layer.shadowOpacity
-        }
-        set {
-            layer.shadowOpacity = newValue
-        }
-    }
-    
-    @IBInspectable
-    var shadowOffset: CGSize {
-        get {
-            return layer.shadowOffset
-        }
-        set {
-            layer.shadowOffset = newValue
-        }
-    }
-    
-    @IBInspectable
-    var shadowColor: UIColor? {
-        get {
-            if let color = layer.shadowColor {
-                return UIColor(cgColor: color)
-            }
-            return nil
-        }
-        set {
-            if let color = newValue {
-                layer.shadowColor = color.cgColor
-            } else {
-                layer.shadowColor = nil
-            }
-        }
-    }
-}*/
+
 
 class GradientView: UIView {
+    
+    
     override open class var layerClass: AnyClass {
         return CAGradientLayer.classForCoder()
     }
@@ -378,8 +400,14 @@ class GradientView: UIView {
         }
     }
     
+    @IBInspectable var shadowColor: UIColor = UIColor(red:0.41, green:0.62, blue:0.78, alpha:1.0) {
+        didSet {
+            setup()
+        }
+    }
+    
     func setup() {
-        layer.shadowColor = UIColor(red:0.41, green:0.62, blue:0.78, alpha:1.0).cgColor
+        layer.shadowColor = shadowColor.cgColor
         layer.shadowOffset = CGSize.zero
         layer.shadowRadius = 10.0
         layer.shadowOpacity = 0.2
@@ -437,4 +465,11 @@ extension Date {
         }
         
     }
+}
+
+extension UIColor{
+    
+    @nonobjc static var clr_blue: UIColor = UIColor(hue: 0.6, saturation: 0.85, brightness: 1, alpha: 1)
+   
+    
 }

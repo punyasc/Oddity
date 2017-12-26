@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ChameleonFramework
 
 class OddsResultViewController: UIViewController {
 
@@ -31,8 +32,8 @@ class OddsResultViewController: UIViewController {
         mypickLabel.text = isEr ? "\(erPick)" : "\(eePick)"
         theirpickLabel.text = isEr ? "\(eePick)" : "\(erPick)"
         if erPick == eePick {
-            mypickLabel.textColor = isEr ? .green : .red
-            theirpickLabel.textColor = isEr ? .green : .red
+            mypickLabel.textColor = isEr ? UIColor.flatGreen() : UIColor.flatRed()
+            theirpickLabel.textColor = isEr ? UIColor.flatGreen() : UIColor.flatRed()
             winloseLabel.text = isEr ? "You win!" : "You lost!"
             detailLabel.text = isEr ? "Make sure to rub it in their face" : "Looks like the odds were not in your favor."
         } else {

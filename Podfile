@@ -10,7 +10,10 @@ target 'Oddity' do
 	pod 'Firebase/Auth'
 	pod 'Firebase/Database'
 	pod 'Spring', :git => 'https://github.com/MengTo/Spring.git'
-  target 'OddityTests' do
+	pod 'UICircularProgressRing'
+	pod 'ChameleonFramework'
+	pod 'IQKeyboardManagerSwift' 
+ target 'OddityTests' do
     inherit! :search_paths
     # Pods for testing
   end

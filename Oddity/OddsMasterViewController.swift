@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import ChameleonFramework
 
 class OddsMasterViewController: UIViewController {
 
@@ -45,12 +46,28 @@ class OddsMasterViewController: UIViewController {
         //self.cardView.layer.masksToBounds = false
         self.cardView.contentMode = UIViewContentMode.redraw
         self.cardView.setNeedsDisplay()
+        ///////
+        self.view.backgroundColor = UIColor(gradientStyle:UIGradientStyle.topToBottom, withFrame:view.frame, andColors:[UIColor.Primary.bgGradTop, UIColor.Primary.bgGradBot])
+        navigationItem.titleView = playersView
+        navigationItem.leftBarButtonItem?.title = ""
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-cancel-72"), style: .plain, target: self, action: #selector(OddsMasterViewController.dismissModal))
+        navigationController?.navigationBar.backgroundColor = .clear
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        self.hideKeyboardWhenTappedAround()
+        // Do any additional setup after loading the view.
+    }
+    
+    @objc func dismissModal() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         if mid != nil {
             refreshUI()
         }
-        navigationItem.titleView = playersView
-        navigationItem.leftBarButtonItem?.title = ""
-        // Do any additional setup after loading the view.
+        
     }
     
 
@@ -155,10 +172,6 @@ class OddsMasterViewController: UIViewController {
             return
         }
         
-    }
-    
-    @IBAction func dismissPress(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
     }
     
 

@@ -11,10 +11,11 @@ import Firebase
 
 class OddsLimitViewController: UIViewController {
 
+    @IBOutlet var numCard: UIView!
     @IBOutlet var limitField: UITextField!
     @IBOutlet var mynumField: UITextField!
     var mid:String?
-    
+    var limits:[Int] = [2, 3, 4, 5, 10, 15, 20, 30, 40, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 999]
     var ref:DatabaseReference!
     
     override func viewDidLoad() {

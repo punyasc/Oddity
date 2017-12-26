@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        IQKeyboardManager.sharedManager().enable = true
         FirebaseApp.configure()
         let authHandle = Auth.auth().addStateDidChangeListener { (auth, user) in
             if user == nil {
@@ -23,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 let storyboard = UIStoryboard(name: "Login", bundle: nil)
                 
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "WelcomeNavVC")
                 
                 self.window?.rootViewController = initialViewController
                 self.window?.makeKeyAndVisible()
@@ -32,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("USR EXIST")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "HomeNavVC")
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "PagesNavVC")
                 
                 self.window?.rootViewController = initialViewController
                 self.window?.makeKeyAndVisible()

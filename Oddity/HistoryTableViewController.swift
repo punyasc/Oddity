@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import ChameleonFramework
 
 class HistoryTableViewController: UITableViewController {
 
@@ -19,6 +20,7 @@ class HistoryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
+        self.view.backgroundColor = UIColor(gradientStyle:UIGradientStyle.topToBottom, withFrame:view.frame, andColors:[UIColor.Primary.bgGradTop, UIColor.Primary.bgGradBot])
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -60,9 +62,6 @@ class HistoryTableViewController: UITableViewController {
         })
     }
     
-    @IBAction func dismissPress(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
     
     
 
@@ -128,12 +127,18 @@ class HistoryTableViewController: UITableViewController {
     
     // MARK: - Navigation
 
+    var modalVC: OddsMasterViewController?
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? OddsMasterViewController {
-            dest.mid = chosenMid
+        if let destNC = segue.destination as? UINavigationController {
+            if let dest = destNC.topViewController as? OddsMasterViewController {
+                modalVC = dest
+                dest.mid = chosenMid
+            }
         }
     }
+    
  
 
 }

@@ -21,7 +21,6 @@ class OddsRespondViewController: UIViewController {
         super.viewDidLoad()
         ref = Database.database().reference()
         self.hideKeyboardWhenTappedAround()
-        self.view.bindToKeyboard()
         // Do any additional setup after loading the view.
     }
 

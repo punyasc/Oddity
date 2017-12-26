@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
         ref = Database.database().reference()
         //self.view.bindToKeyboard()
         self.hideKeyboardWhenTappedAround()
-        
+        navigationItem.title = "Log In"
         //let tap = UITapGestureRecognizer(target: self.view, action: Selector("dismissKeyboard"))
         //tap.cancelsTouchesInView = false
         //self.view.addGestureRecognizer(tap)
@@ -28,9 +28,6 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        authHandle = Auth.auth().addStateDidChangeListener { (auth, user) in
-            // ...
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,33 +57,6 @@ class LoginViewController: UIViewController {
             self.performSegue(withIdentifier: "LoggedIn", sender: self)
         }
     }
-    
-    
-    @IBOutlet var regEmailField: UITextField!
-    @IBOutlet var regPassField: UITextField!
-    @IBOutlet var regHandleField: UITextField!
-    @IBAction func registerPress(_ sender: Any) {
-        let email = regEmailField.text ?? ""
-        let password = regPassField.text ?? ""
-        let handle = regHandleField.text ?? ""
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-            if (error != nil) {
-                print("ERR signup:", error!)
-                return
-            }
-            print("SUCCESS, user created:", email)
-        
-            //Insert user into Database
-            //self.ref.child("users").child(user!.uid).setValue()
-            let newUser = ["handle": handle, "numChallenged":0, "numCompleted":0] as [String : Any]
-            //self.ref.child("handles").setValue([handle: user!.uid])
-            let childUpdates = ["/users/\(user!.uid)": newUser,
-                                "/handles/\(handle)": user!.uid] as [String : Any]
-            self.ref.updateChildValues(childUpdates)
-            self.performSegue(withIdentifier: "LoggedIn", sender: self)
-        }
-    }
-    
 
 
 }

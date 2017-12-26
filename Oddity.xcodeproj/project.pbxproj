@@ -14,6 +14,10 @@
 		B56AE5071FEC97BF0004E965 /* OddsLimitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56AE5061FEC97BF0004E965 /* OddsLimitViewController.swift */; };
 		B56AE5091FEC97EA0004E965 /* OddsRespondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56AE5081FEC97EA0004E965 /* OddsRespondViewController.swift */; };
 		B56AE50B1FEC97FC0004E965 /* OddsResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56AE50A1FEC97FC0004E965 /* OddsResultViewController.swift */; };
+		B5780C281FF0433F00694FB8 /* ColorThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5780C271FF0433F00694FB8 /* ColorThemes.swift */; };
+		B5780C2A1FF1DD5F00694FB8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5780C291FF1DD5F00694FB8 /* WelcomeViewController.swift */; };
+		B5780C2C1FF1EB0A00694FB8 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5780C2B1FF1EB0A00694FB8 /* SignupViewController.swift */; };
+		B5780C2E1FF1F74D00694FB8 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5780C2D1FF1F74D00694FB8 /* Validator.swift */; };
 		B59196761FE4A00A00ECC5EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59196751FE4A00A00ECC5EE /* AppDelegate.swift */; };
 		B59196781FE4A00A00ECC5EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59196771FE4A00A00ECC5EE /* LoginViewController.swift */; };
 		B591967B1FE4A00A00ECC5EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B59196791FE4A00A00ECC5EE /* Main.storyboard */; };
@@ -29,6 +33,9 @@
 		B59196AC1FEB1D0A00ECC5EE /* OddsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59196AB1FEB1D0A00ECC5EE /* OddsDetailViewController.swift */; };
 		B5A934761FEDB288000DA99D /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A934751FEDB288000DA99D /* HistoryTableViewController.swift */; };
 		B5A934781FEDE3B3000DA99D /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5A934771FEDE3B3000DA99D /* Login.storyboard */; };
+		B5C0A3F01FEF7D8A006C7F40 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A3EF1FEF7D8A006C7F40 /* ProfileTableViewController.swift */; };
+		B5C0A3F21FEF7D9A006C7F40 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A3F11FEF7D9A006C7F40 /* ProfileViewController.swift */; };
+		B5E233BB1FEF0ED4007F3E10 /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E233BA1FEF0ED4007F3E10 /* PagesViewController.swift */; };
 		DA396C55B89D53B72D462802 /* Pods_Oddity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D7B9A9FAA3F8EE7D32EA8D /* Pods_Oddity.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +69,11 @@
 		B56AE5061FEC97BF0004E965 /* OddsLimitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddsLimitViewController.swift; sourceTree = "<group>"; };
 		B56AE5081FEC97EA0004E965 /* OddsRespondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddsRespondViewController.swift; sourceTree = "<group>"; };
 		B56AE50A1FEC97FC0004E965 /* OddsResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddsResultViewController.swift; sourceTree = "<group>"; };
+		B5780C271FF0433F00694FB8 /* ColorThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemes.swift; sourceTree = "<group>"; };
+		B5780C291FF1DD5F00694FB8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		B5780C2B1FF1EB0A00694FB8 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		B5780C2D1FF1F74D00694FB8 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		B57E06F01FF219A00030605D /* Oddity-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Oddity-Bridging-Header.h"; sourceTree = "<group>"; };
 		B59196721FE4A00A00ECC5EE /* Oddity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oddity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B59196751FE4A00A00ECC5EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B59196771FE4A00A00ECC5EE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +93,9 @@
 		B59196AB1FEB1D0A00ECC5EE /* OddsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddsDetailViewController.swift; sourceTree = "<group>"; };
 		B5A934751FEDB288000DA99D /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		B5A934771FEDE3B3000DA99D /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		B5C0A3EF1FEF7D8A006C7F40 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		B5C0A3F11FEF7D9A006C7F40 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		B5E233BA1FEF0ED4007F3E10 /* PagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
 		B97CFFFB489F2A43F140DC42 /* Pods_OddityTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OddityTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD9CEFBFA1F963C05256E8B /* Pods_OddityUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OddityUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -132,6 +147,7 @@
 				B59196731FE4A00A00ECC5EE /* Products */,
 				D76E497F035118DE5184FD7F /* Pods */,
 				0F77F3F44511C8DE8E9E97B3 /* Frameworks */,
+				B57E06F01FF219A00030605D /* Oddity-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,9 +164,16 @@
 		B59196741FE4A00A00ECC5EE /* Oddity */ = {
 			isa = PBXGroup;
 			children = (
+				B5780C271FF0433F00694FB8 /* ColorThemes.swift */,
 				B59196751FE4A00A00ECC5EE /* AppDelegate.swift */,
+				B5780C291FF1DD5F00694FB8 /* WelcomeViewController.swift */,
 				B59196771FE4A00A00ECC5EE /* LoginViewController.swift */,
+				B5780C2B1FF1EB0A00694FB8 /* SignupViewController.swift */,
 				B59196791FE4A00A00ECC5EE /* Main.storyboard */,
+				B5C0A3EF1FEF7D8A006C7F40 /* ProfileTableViewController.swift */,
+				B5780C2D1FF1F74D00694FB8 /* Validator.swift */,
+				B5C0A3F11FEF7D9A006C7F40 /* ProfileViewController.swift */,
+				B5E233BA1FEF0ED4007F3E10 /* PagesViewController.swift */,
 				B5A934771FEDE3B3000DA99D /* Login.storyboard */,
 				B5A934751FEDB288000DA99D /* HistoryTableViewController.swift */,
 				B56AE50A1FEC97FC0004E965 /* OddsResultViewController.swift */,
@@ -277,6 +300,7 @@
 				TargetAttributes = {
 					B59196711FE4A00A00ECC5EE = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					B59196851FE4A00A00ECC5EE = {
@@ -486,12 +510,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				B56AE5071FEC97BF0004E965 /* OddsLimitViewController.swift in Sources */,
+				B5780C2A1FF1DD5F00694FB8 /* WelcomeViewController.swift in Sources */,
 				B56AE5051FEC978E0004E965 /* OddsWaitingViewController.swift in Sources */,
 				B59196AA1FEB0F3900ECC5EE /* RoundButton.swift in Sources */,
+				B5780C281FF0433F00694FB8 /* ColorThemes.swift in Sources */,
+				B5E233BB1FEF0ED4007F3E10 /* PagesViewController.swift in Sources */,
+				B5C0A3F21FEF7D9A006C7F40 /* ProfileViewController.swift in Sources */,
 				B56AE50B1FEC97FC0004E965 /* OddsResultViewController.swift in Sources */,
 				B56AE5091FEC97EA0004E965 /* OddsRespondViewController.swift in Sources */,
 				B59196781FE4A00A00ECC5EE /* LoginViewController.swift in Sources */,
+				B5780C2E1FF1F74D00694FB8 /* Validator.swift in Sources */,
 				B59196761FE4A00A00ECC5EE /* AppDelegate.swift in Sources */,
+				B5780C2C1FF1EB0A00694FB8 /* SignupViewController.swift in Sources */,
+				B5C0A3F01FEF7D8A006C7F40 /* ProfileTableViewController.swift in Sources */,
 				B59196AC1FEB1D0A00ECC5EE /* OddsDetailViewController.swift in Sources */,
 				B5A934761FEDB288000DA99D /* HistoryTableViewController.swift in Sources */,
 				B56AE5031FEC976B0004E965 /* OddsMasterViewController.swift in Sources */,
@@ -662,12 +693,15 @@
 			baseConfigurationReference = 0B525502C5238476DC404729 /* Pods-Oddity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UZV9JB2U7V;
 				INFOPLIST_FILE = Oddity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = punya.Oddity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Oddity-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -678,12 +712,14 @@
 			baseConfigurationReference = 42CE0ADC18DC75ED5708D862 /* Pods-Oddity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UZV9JB2U7V;
 				INFOPLIST_FILE = Oddity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = punya.Oddity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Oddity-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
