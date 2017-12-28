@@ -8,14 +8,13 @@
 
 import UIKit
 import Firebase
-import UICircularProgressRing
 import ChameleonFramework
 
 class ProfileViewController: UIViewController {
 
     
+    @IBOutlet var numChallengedButton: RoundButton!
     @IBOutlet var handleLabel: UILabel!
-    @IBOutlet var progressRing: UICircularProgressRingView!
     var handle:String?
     var ref:DatabaseReference!
     
@@ -26,6 +25,12 @@ class ProfileViewController: UIViewController {
         getHandle()
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let numChallenged = UserDefaults.standard.integer(forKey: "numChallenged")
+        numChallengedButton.setTitle("\(numChallenged)", for: .normal)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -34,33 +39,19 @@ class ProfileViewController: UIViewController {
     
     func getHandle() {
         let user = Auth.auth().currentUser
-        ref.child("/users/\(user?.uid ?? " ")").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("/users/\(user?.uid ?? " ")/handle").observe( .value, with: { (snapshot) in
             // Get user value
-            let userDict = snapshot.value as? [String:Any] ?? [:]
-            self.handle = userDict["handle"] as? String ?? " "
-            let numCompleted = userDict["numCompleted"] as? Int ?? 0
-            var numChallenged = userDict["numChallenged"] as? Int ?? 1
-            numChallenged = numChallenged == 0 ? 1 : numChallenged
-            var score = CGFloat(numCompleted)/CGFloat(numChallenged)
-            self.progressRing.setProgress(value: score*100, animationDuration: 1.0) {
-                print("Done animating!")
-                // Do anything your heart desires...
-            }
+            self.handle = snapshot.value as? String ?? " "
+            //let numCompleted = userDict["numCompleted"] as? Int ?? 0
+            //var numChallenged = userDict["numChallenged"] as? Int ?? 1
+            //numChallenged = numChallenged == 0 ? 1 : numChallenged
+            //var score = CGFloat(numCompleted)/CGFloat(numChallenged)
             self.handleLabel.text = "@\(self.handle ?? "me")"
         }) { (error) in
             // print(error.localizedDescription)
         }
     }
 
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? ProfileTableViewController {
-            dest.handle = handle ?? " "
-        }
-    }
  
 
 }

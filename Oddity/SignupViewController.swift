@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SwiftMessages
 
 class SignupViewController: UIViewController {
 
@@ -33,24 +34,44 @@ class SignupViewController: UIViewController {
         print("registering")
         let email = regEmailField.text ?? ""
         let password = regPassField.text ?? ""
-        let handle = regHandleField.text ?? ""
+        var handle = regHandleField.text ?? ""
+        handle = handle.trimmingCharacters(in: .whitespacesAndNewlines)
+        if handle.count < 4 {
+            showAlert(title: "Error", message: "Your username must have more than 4 characters", theme: .error)
+            return
+        } else if handle.count > 15 {
+            showAlert(title: "Error", message: "Your username must have 15 or fewer characters", theme: .error)
+            return
+        } else if (handle.rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) != nil) {
+            showAlert(title: "Error", message: "Your username may only have letters or numbers", theme: .error)
+            return
+        }
         
-        //Auth.
         var handleQuery = ref.child("/handles/\(handle)")
         handleQuery.observeSingleEvent(of: .value, with:{ (snapshot: DataSnapshot) in
             if snapshot.exists() {
                 //username taken
                 print("taken")
-                let alert = UIAlertController(title: "This username is already taken.", message: "", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                self.showAlert(title: "Error", message: "This username is already in use", theme: .error)
             } else {
                 //username not taken, proceed
                 print("not taken")
                 
                 Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
                     if (error != nil) {
-                        print("ERR signup:", error!)
+                        let err = error as! NSError
+                        var message = ""
+                        switch AuthErrorCode(rawValue: error!._code)! {
+                        case .invalidEmail:
+                            message = "Invalid Email"
+                        case .emailAlreadyInUse:
+                            message = "This Email is already in use"
+                        case .weakPassword:
+                            message = "Weak password: \(err.userInfo[NSLocalizedFailureReasonErrorKey] ?? "")"
+                        default:
+                            message = "An error occurred, try again"
+                        }
+                        self.showAlert(title: "Error", message: message, theme: .error)
                         return
                     }
                     print("SUCCESS, user created:", email)
@@ -62,7 +83,13 @@ class SignupViewController: UIViewController {
                     let childUpdates = ["/users/\(user!.uid)": newUser,
                                         "/handles/\(handle)": user!.uid] as [String : Any]
                     self.ref.updateChildValues(childUpdates)
-                    self.performSegue(withIdentifier: "LoggedIn", sender: self)
+                    
+                    self.ref.child("/users/\(user!.uid)").observe(DataEventType.value, with: { (snapshot) in
+                        if snapshot.exists() {
+                            self.performSegue(withIdentifier: "LoggedIn", sender: self)
+                        }
+                    })
+                    
                 }
  
             }

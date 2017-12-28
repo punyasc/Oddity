@@ -16,12 +16,29 @@ class PagesViewController: UIPageViewController {
         dataSource = self
         delegate = self
         
+        if let myView = view?.subviews.first as? UIScrollView {
+            myView.canCancelContentTouches = false
+        }
+        /*
         navigationItem.title = ""
         let tiv = TintedImageView(image:#imageLiteral(resourceName: "icons8-dog-house-filled-72"))
+        tiv.alpha = 0.2
         tiv.tintColor = view.window?.tintColor
         navigationItem.titleView = tiv
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-customer-72"), style: .plain, target: self, action: #selector(PagesViewController.jumpToProfile))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-time-machine-72-2"), style: .plain, target: self, action: #selector(PagesViewController.jumpToHistory))*/
+        
+        
+        var butt = UIButton()
+        butt.setImage(#imageLiteral(resourceName: "icons8-dog-house-filled-72"), for: .normal)
+        butt.addTarget(self, action: #selector(PagesViewController.jumpToHome), for: .touchUpInside)
+        var vu = UIView()
+        vu.addSubview(UIButton())
+        navigationItem.titleView = butt
+        navigationItem.titleView?.alpha = 0.3
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-customer-72"), style: .plain, target: self, action: #selector(PagesViewController.jumpToProfile))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-time-machine-72-2"), style: .plain, target: self, action: #selector(PagesViewController.jumpToHistory))
+        
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -29,6 +46,8 @@ class PagesViewController: UIPageViewController {
                                direction: .forward,
                                animated: true,
                                completion: nil)
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,22 +88,39 @@ extension PagesViewController: UIPageViewControllerDataSource, UIPageViewControl
             print("hur")
             switch vc {
             case orderedViewControllers[0]:
-                navigationItem.title = "Profile"
-                navigationItem.titleView = nil
-                navigationItem.leftBarButtonItem = nil
-                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-dog-house-filled-72"), style: .plain, target: self, action: #selector(PagesViewController.jumpToHome))
-            case orderedViewControllers[1]:
-                navigationItem.title = ""
-                let tiv = TintedImageView(image:#imageLiteral(resourceName: "icons8-dog-house-filled-72"))
+                /*
+                let tiv = TintedImageView(image:#imageLiteral(resourceName: "icons8-customer-72"))
+                tiv.alpha = 0.2
                 tiv.tintColor = view.window?.tintColor
                 navigationItem.titleView = tiv
-                navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-customer-72"), style: .plain, target: self, action: #selector(PagesViewController.jumpToProfile))
-                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-time-machine-72-2"), style: .plain, target: self, action: #selector(PagesViewController.jumpToHistory))
+                //navigationItem.title = "Profile"
+                //navigationItem.titleView = nil
+                navigationItem.leftBarButtonItem = nil
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-dog-house-filled-72"), style: .plain, target: self, action: #selector(PagesViewController.jumpToHome))*/
+                navigationItem.leftBarButtonItem?.tintColor = .lightGray
+                navigationItem.titleView?.alpha = 1.0
+                navigationItem.rightBarButtonItem?.tintColor = .black
+            case orderedViewControllers[1]:
+                //navigationItem.title = ""
+                //let tiv = TintedImageView(image:#imageLiteral(resourceName: "icons8-dog-house-filled-72"))
+                //tiv.alpha = 0.2
+                //tiv.tintColor = view.window?.tintColor
+                navigationItem.leftBarButtonItem?.tintColor = .black
+                navigationItem.titleView?.alpha = 0.3
+                navigationItem.rightBarButtonItem?.tintColor = .black
             case orderedViewControllers[2]:
-                navigationItem.title = "My Odds"
-                navigationItem.titleView = nil
+                /*
+                let tiv = TintedImageView(image: #imageLiteral(resourceName: "icons8-time-machine-72-2"))
+                tiv.alpha = 0.2
+                tiv.tintColor = view.window?.tintColor
+                navigationItem.titleView = tiv
+                //navigationItem.title = "My Odds"
+                //navigationItem.titleView = nil
                 navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-dog-house-filled-72"), style: .plain, target: self, action: #selector(PagesViewController.jumpToHome))
-                navigationItem.rightBarButtonItem = nil
+                navigationItem.rightBarButtonItem = nil */
+                navigationItem.leftBarButtonItem?.tintColor = .black
+                navigationItem.titleView?.alpha = 1.0
+                navigationItem.rightBarButtonItem?.tintColor = .lightGray
             default:
                 navigationItem.title = "Oddity"
             }

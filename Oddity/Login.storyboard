@@ -121,7 +121,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mS2-Ej-fef">
                                 <rect key="frame" x="30" y="206" width="260" height="50"/>
@@ -149,11 +149,20 @@
                                     <action selector="loginPress:" destination="9j0-iS-5Ox" eventType="touchUpInside" id="oNK-uR-Ruw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbc-1R-EDn">
+                                <rect key="frame" x="99" y="345" width="123" height="30"/>
+                                <state key="normal" title="Forgot Password?"/>
+                                <connections>
+                                    <action selector="forgotPasswordPress:" destination="9j0-iS-5Ox" eventType="touchUpInside" id="Ssd-cB-P4l"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ivq-aH-fWa" firstAttribute="leading" secondItem="W3d-bt-les" secondAttribute="leading" constant="30" id="3xu-yS-7T9"/>
+                            <constraint firstItem="hbc-1R-EDn" firstAttribute="top" secondItem="v9f-0E-457" secondAttribute="bottom" constant="19" id="AYe-Bw-hex"/>
                             <constraint firstItem="v9f-0E-457" firstAttribute="top" secondItem="mS2-Ej-fef" secondAttribute="bottom" constant="30" id="ESH-hG-dBK"/>
+                            <constraint firstItem="hbc-1R-EDn" firstAttribute="centerX" secondItem="rQU-4w-48f" secondAttribute="centerX" id="Iip-yG-yPC"/>
                             <constraint firstItem="W3d-bt-les" firstAttribute="trailing" secondItem="Ivq-aH-fWa" secondAttribute="trailing" constant="30" id="MOF-7f-nzQ"/>
                             <constraint firstItem="mS2-Ej-fef" firstAttribute="leading" secondItem="W3d-bt-les" secondAttribute="leading" constant="30" id="RT2-dx-cue"/>
                             <constraint firstItem="W3d-bt-les" firstAttribute="trailing" secondItem="mS2-Ej-fef" secondAttribute="trailing" constant="30" id="X5h-wa-R07"/>
@@ -196,7 +205,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qps-8G-gQS">
                                 <rect key="frame" x="30" y="256" width="260" height="40"/>
@@ -231,7 +240,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="username"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES" textContentType="username"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -292,7 +301,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GsC-VP-Qq1"/>
+        <segue reference="bXs-c0-RBP"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

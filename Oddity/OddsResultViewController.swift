@@ -8,6 +8,7 @@
 
 import UIKit
 import ChameleonFramework
+import Firebase
 
 class OddsResultViewController: UIViewController {
 
@@ -16,9 +17,14 @@ class OddsResultViewController: UIViewController {
     @IBOutlet var winloseLabel: UILabel!
     @IBOutlet var detailLabel: UILabel!
     var mid:String?
+    var ref:DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+        let childUpdates = ["/users/\(Auth.auth().currentUser!.uid)/matches/\(mid!)/unread": false] as [String: Any]
+        ref = Database.database().reference()
+        ref.updateChildValues(childUpdates)
         // Do any additional setup after loading the view.
     }
 

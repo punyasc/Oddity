@@ -10,9 +10,11 @@ import UIKit
 import Firebase
 import Spring
 import ChameleonFramework
+import SwiftMessages
 
 class HomeViewController: UIViewController, UITextViewDelegate {
 
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var unreadLabel: UILabel!
     @IBOutlet var unreadWrapper: SpringView!
     @IBOutlet var unreadCard: RoundedView!
@@ -28,7 +30,7 @@ class HomeViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-        getUserHandle(for: Auth.auth().currentUser?.uid ?? "")
+        //getUserHandle(for: Auth.auth().currentUser?.uid ?? "")
         self.hideKeyboardWhenTappedAround()
         self.cardView.contentMode = UIViewContentMode.redraw
         self.cardView.setNeedsDisplay()
@@ -36,6 +38,13 @@ class HomeViewController: UIViewController, UITextViewDelegate {
         cardWrapper.animate()
         unreadCard.isHidden = true
         setUnreadListener()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.activityIndicator.isHidden = true
+        self.cardWrapper.alpha = 1.0
+        getUserHandle(for: Auth.auth().currentUser?.uid ?? "")
     }
     
     func setUnreadListener() {
@@ -60,7 +69,7 @@ class HomeViewController: UIViewController, UITextViewDelegate {
             }
             self.curUnread = unread
             print("UNREAD:", unread)
-            self.unreadLabel.text = "You have \(unread) pending Odds"
+            self.unreadLabel.text = "You have \(unread) new Odds"
         })
     }
     
@@ -82,18 +91,37 @@ class HomeViewController: UIViewController, UITextViewDelegate {
         cardWrapper.duration = 0.5
         cardWrapper.force = 0.2
         cardWrapper.animate()
-        let handle = handleField?.text ?? "magician" //implement handle-checking
-        ref.child("handles").child(handle).observeSingleEvent(of: .value, with: { (snapshot) in
+        var handle = handleField!.text ?? ""
+        handle = handle.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        if handle == "" {
+            showAlert(title: "No recipient", message: "Please enter a username to send this to", theme: .warning)
+            return
+        } else if handle == userHandle {
+            showAlert(title: "Don't @ yourself", message: "Enter a username other than your own", theme: .warning)
+            return
+        } else if taskView.text == "" {
+            showAlert(title: "Enter a dare", message: "Enter a dare to send", theme: .warning)
+            return
+        }
+        activityIndicator.isHidden = false
+        cardWrapper.alpha = 0.5
+        ref.child("/handles/\(handle)").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
-            if snapshot.exists() {
-                self.opponentId = snapshot.value as! String
+            if let oppId = snapshot.value as? String {
+                self.opponentId = oppId
                 self.opponentHandle = handle
                 self.createChallenge()
             } else {
+                self.activityIndicator.isHidden = true
+                self.cardWrapper.alpha = 1.0
+                self.showAlert(title: "Invalid username", message: "No one with that username exists", theme: .warning)
                 print("Snapshot did not exist")
             }
             // ...
         }) { (error) in
+            self.showAlert(title: "Could not send", message: "Check your internet connection", theme: .error)
+            self.activityIndicator.isHidden = true
+            self.cardWrapper.alpha = 1.0
             // print(error.localizedDescription)
         }
     }
@@ -109,7 +137,6 @@ class HomeViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func openUnreadPress(_ sender: Any) {
         if let par = parent as? PagesViewController {
-            print("PARR")
             par.jumpToHistory()
         }
     }
@@ -149,11 +176,15 @@ class HomeViewController: UIViewController, UITextViewDelegate {
         ref.child("/users/\(opponentId!)/unread").observeSingleEvent(of: .value, with: { (snapshot) in
             var unread = snapshot.value as? Int ?? 0
             unread += 1
-            
             let childUpdates = ["/matches/\(mid)": match,
-                                "/users/\(self.opponentId!)/matches/\(mid)": task,
-                                "/users/\(uid)/matches/\(mid)": task,
+                                "/users/\(uid)/matches/\(mid)/task":task,
+                                "/users/\(uid)/matches/\(mid)/unread":false,
+                                "/users/\(uid)/matches/\(mid)/intDate":Double(interval),
+                                "/users/\(self.opponentId!)/matches/\(mid)/task":task,
+                                "/users/\(self.opponentId!)/matches/\(mid)/unread":true,
+                                "/users/\(self.opponentId!)/matches/\(mid)/intDate":Double(interval),
                                 "/users/\(self.opponentId!)/unread":unread] as [String : Any]
+            
             self.ref.updateChildValues(childUpdates)
             
             let statusRef = self.ref.child("matches").child(mid).child("status")
@@ -166,12 +197,24 @@ class HomeViewController: UIViewController, UITextViewDelegate {
                     if let placeholderLabel = self.taskView.viewWithTag(100) as? UILabel {
                         placeholderLabel.isHidden = false
                     }
-                    self.performSegue(withIdentifier: "showOddsDetail", sender: self)
+                    let numChallenged = UserDefaults.standard.integer(forKey: "numChallenged")
+                    UserDefaults.standard.set(numChallenged + 1, forKey: "numChallenged")
+                    self.activityIndicator.isHidden = true
+                    self.cardWrapper.alpha = 1.0
+                    self.showAlert(title: "Odds sent!", message: "You sent an Odds to \(self.opponentHandle!)", theme: .success)
+                    //self.performSegue(withIdentifier: "showOddsDetail", sender: self)
                 }
                 
-            })
+            }) { (error) in
+                self.showAlert(title: "Could not send", message: "Check your internet connection", theme: .error)
+                self.activityIndicator.isHidden = true
+                self.cardWrapper.alpha = 1.0
+            }
             
         }) { (error) in
+            self.showAlert(title: "Could not send", message: "Check your internet connection", theme: .error)
+            self.activityIndicator.isHidden = true
+            self.cardWrapper.alpha = 1.0
         }
         
         
@@ -406,10 +449,16 @@ class GradientView: UIView {
         }
     }
     
+    @IBInspectable var shadowRadius: CGFloat = 10.0 {
+        didSet {
+            setup()
+        }
+    }
+    
     func setup() {
         layer.shadowColor = shadowColor.cgColor
         layer.shadowOffset = CGSize.zero
-        layer.shadowRadius = 10.0
+        layer.shadowRadius = shadowRadius
         layer.shadowOpacity = 0.2
         super.backgroundColor = UIColor.clear
     }
@@ -472,4 +521,19 @@ extension UIColor{
     @nonobjc static var clr_blue: UIColor = UIColor(hue: 0.6, saturation: 0.85, brightness: 1, alpha: 1)
    
     
+}
+
+extension UIViewController {
+    func showAlert(title:String, message:String, theme:Theme) {
+        let view = MessageView.viewFromNib(layout: .cardView)
+        var config = SwiftMessages.Config()
+        config.presentationStyle = .top
+        config.duration = .seconds(seconds: 3.5)
+        config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+        view.configureTheme(theme)
+        view.configureDropShadow()
+        view.button?.isHidden = true
+        view.configureContent(title: title, body: message)
+        SwiftMessages.show(config: config, view: view)
+    }
 }

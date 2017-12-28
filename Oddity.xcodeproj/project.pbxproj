@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		09D8C92540474F5307B7B005 /* Pods_OddityTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B97CFFFB489F2A43F140DC42 /* Pods_OddityTests.framework */; };
 		316A462B560EFF5F0A282260 /* Pods_OddityUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAD9CEFBFA1F963C05256E8B /* Pods_OddityUITests.framework */; };
+		B55294A51FF2313E0060E2FA /* OddsDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B55294A31FF231370060E2FA /* OddsDetail.storyboard */; };
+		B55294A71FF24E770060E2FA /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55294A61FF24E770060E2FA /* HistoryTableViewCell.swift */; };
+		B55294A91FF253560060E2FA /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55294A81FF253560060E2FA /* Match.swift */; };
+		B55294AB1FF2F2F50060E2FA /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55294AA1FF2F2F50060E2FA /* HistoryViewController.swift */; };
 		B56AE5031FEC976B0004E965 /* OddsMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56AE5021FEC976B0004E965 /* OddsMasterViewController.swift */; };
 		B56AE5051FEC978E0004E965 /* OddsWaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56AE5041FEC978E0004E965 /* OddsWaitingViewController.swift */; };
 		B56AE5071FEC97BF0004E965 /* OddsLimitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56AE5061FEC97BF0004E965 /* OddsLimitViewController.swift */; };
@@ -64,6 +68,10 @@
 		5C1A83EED5D08A61DCD755F7 /* Pods-OddityTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OddityTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OddityTests/Pods-OddityTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5F4743E9A261294C02EFC46B /* Pods-OddityUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OddityUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OddityUITests/Pods-OddityUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9330D98432E2019994AAD05B /* Pods-OddityUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OddityUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OddityUITests/Pods-OddityUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B55294A41FF231370060E2FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OddsDetail.storyboard; sourceTree = "<group>"; };
+		B55294A61FF24E770060E2FA /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		B55294A81FF253560060E2FA /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		B55294AA1FF2F2F50060E2FA /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		B56AE5021FEC976B0004E965 /* OddsMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddsMasterViewController.swift; sourceTree = "<group>"; };
 		B56AE5041FEC978E0004E965 /* OddsWaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddsWaitingViewController.swift; sourceTree = "<group>"; };
 		B56AE5061FEC97BF0004E965 /* OddsLimitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddsLimitViewController.swift; sourceTree = "<group>"; };
@@ -170,12 +178,16 @@
 				B59196771FE4A00A00ECC5EE /* LoginViewController.swift */,
 				B5780C2B1FF1EB0A00694FB8 /* SignupViewController.swift */,
 				B59196791FE4A00A00ECC5EE /* Main.storyboard */,
+				B55294AA1FF2F2F50060E2FA /* HistoryViewController.swift */,
+				B55294A61FF24E770060E2FA /* HistoryTableViewCell.swift */,
+				B55294A31FF231370060E2FA /* OddsDetail.storyboard */,
 				B5C0A3EF1FEF7D8A006C7F40 /* ProfileTableViewController.swift */,
 				B5780C2D1FF1F74D00694FB8 /* Validator.swift */,
 				B5C0A3F11FEF7D9A006C7F40 /* ProfileViewController.swift */,
 				B5E233BA1FEF0ED4007F3E10 /* PagesViewController.swift */,
 				B5A934771FEDE3B3000DA99D /* Login.storyboard */,
 				B5A934751FEDB288000DA99D /* HistoryTableViewController.swift */,
+				B55294A81FF253560060E2FA /* Match.swift */,
 				B56AE50A1FEC97FC0004E965 /* OddsResultViewController.swift */,
 				B56AE5081FEC97EA0004E965 /* OddsRespondViewController.swift */,
 				B56AE5061FEC97BF0004E965 /* OddsLimitViewController.swift */,
@@ -340,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B55294A51FF2313E0060E2FA /* OddsDetail.storyboard in Resources */,
 				B59196801FE4A00A00ECC5EE /* LaunchScreen.storyboard in Resources */,
 				B59196A41FE4A0C200ECC5EE /* GoogleService-Info.plist in Resources */,
 				B591967D1FE4A00A00ECC5EE /* Assets.xcassets in Resources */,
@@ -512,6 +525,7 @@
 				B56AE5071FEC97BF0004E965 /* OddsLimitViewController.swift in Sources */,
 				B5780C2A1FF1DD5F00694FB8 /* WelcomeViewController.swift in Sources */,
 				B56AE5051FEC978E0004E965 /* OddsWaitingViewController.swift in Sources */,
+				B55294A91FF253560060E2FA /* Match.swift in Sources */,
 				B59196AA1FEB0F3900ECC5EE /* RoundButton.swift in Sources */,
 				B5780C281FF0433F00694FB8 /* ColorThemes.swift in Sources */,
 				B5E233BB1FEF0ED4007F3E10 /* PagesViewController.swift in Sources */,
@@ -520,10 +534,12 @@
 				B56AE5091FEC97EA0004E965 /* OddsRespondViewController.swift in Sources */,
 				B59196781FE4A00A00ECC5EE /* LoginViewController.swift in Sources */,
 				B5780C2E1FF1F74D00694FB8 /* Validator.swift in Sources */,
+				B55294AB1FF2F2F50060E2FA /* HistoryViewController.swift in Sources */,
 				B59196761FE4A00A00ECC5EE /* AppDelegate.swift in Sources */,
 				B5780C2C1FF1EB0A00694FB8 /* SignupViewController.swift in Sources */,
 				B5C0A3F01FEF7D8A006C7F40 /* ProfileTableViewController.swift in Sources */,
 				B59196AC1FEB1D0A00ECC5EE /* OddsDetailViewController.swift in Sources */,
+				B55294A71FF24E770060E2FA /* HistoryTableViewCell.swift in Sources */,
 				B5A934761FEDB288000DA99D /* HistoryTableViewController.swift in Sources */,
 				B56AE5031FEC976B0004E965 /* OddsMasterViewController.swift in Sources */,
 				B59196A81FE9A46800ECC5EE /* HomeViewController.swift in Sources */,
@@ -562,6 +578,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		B55294A31FF231370060E2FA /* OddsDetail.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B55294A41FF231370060E2FA /* Base */,
+			);
+			name = OddsDetail.storyboard;
+			sourceTree = "<group>";
+		};
 		B59196791FE4A00A00ECC5EE /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -697,6 +721,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UZV9JB2U7V;
 				INFOPLIST_FILE = Oddity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = punya.Oddity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -716,6 +741,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UZV9JB2U7V;
 				INFOPLIST_FILE = Oddity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = punya.Oddity;
 				PRODUCT_NAME = "$(TARGET_NAME)";

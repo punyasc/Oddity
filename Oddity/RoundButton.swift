@@ -21,6 +21,12 @@ import UIKit
         }
     }
     
+    @IBInspectable var flatLeft: Bool = false {
+        didSet {
+            updateCornerRadius()
+        }
+    }
+    
     @IBInspectable var circular: Bool = false {
         didSet {
             updateCornerRadius()
@@ -38,7 +44,12 @@ import UIKit
         let rad = circular ? frame.size.height / 2 : radius
         rectShape.bounds = self.frame
         rectShape.position = self.center
-        let corners:UIRectCorner = flatTop ? [.bottomLeft, .bottomRight] : [.bottomLeft , .bottomRight , .topLeft, .topRight]
+        var corners:UIRectCorner = flatTop ? [.bottomLeft, .bottomRight] : [.bottomLeft , .bottomRight , .topLeft, .topRight]
+        
+        if flatLeft {
+            corners = [.bottomRight, .topRight]
+        }
+        
         rectShape.path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: rad, height: rad)).cgPath
         
         //Here I'm masking the textView's layer with rectShape layer

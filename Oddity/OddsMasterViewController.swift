@@ -12,7 +12,7 @@ import ChameleonFramework
 
 class OddsMasterViewController: UIViewController {
 
-    @IBOutlet var playersView: UIView!
+    @IBOutlet var playersView: TintedImageView!
     var mid:String?
     var ref:DatabaseReference!
     var curStatus:Int = -1
@@ -20,6 +20,7 @@ class OddsMasterViewController: UIViewController {
     var challengeeId:String?
     var limit = -1
     
+    var limitVC:OddsLimitViewController?
     var waitingVC:OddsWaitingViewController?
     var respondVC:OddsRespondViewController?
     var resultVC:OddsResultViewController?
@@ -108,6 +109,8 @@ class OddsMasterViewController: UIViewController {
             self.cardView.layer.shadowOpacity = 1.0
             self.cardView.layer.shadowRadius = 7.0*/
             //self.cardView.setup()
+            
+            
             var opponentHandle = ""
             var opponentId = ""
             let userIsChallenger = (Auth.auth().currentUser?.uid == self.challengerId)
@@ -133,8 +136,9 @@ class OddsMasterViewController: UIViewController {
             }
             
             //Update container views
+            self.limitVC?.updateUI(id: opponentId)
             self.waitingVC?.updateUI(handle: opponentHandle, id: opponentId)
-            self.respondVC?.updateUI(limit: self.limit)
+            self.respondVC?.updateUI(limit: self.limit, id: opponentId)
             self.resultVC?.updateUI(erPick: challengerPick, eePick: challengeePick, isEr: userIsChallenger)
             self.switchContainer()
             
@@ -187,6 +191,7 @@ class OddsMasterViewController: UIViewController {
             self.resultVC = dest
             dest.mid = self.mid
         } else if let dest = segue.destination as? OddsLimitViewController {
+            self.limitVC = dest
             dest.mid = self.mid
         } else if let dest = segue.destination as? OddsWaitingViewController {
             self.waitingVC = dest
