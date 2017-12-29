@@ -27,6 +27,8 @@ class SignupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func unwindToSignup(unwindSegue: UIStoryboardSegue) { }
+    
     @IBOutlet var regEmailField: UITextField!
     @IBOutlet var regPassField: UITextField!
     @IBOutlet var regHandleField: UITextField!
@@ -86,7 +88,7 @@ class SignupViewController: UIViewController {
                     
                     self.ref.child("/users/\(user!.uid)").observe(DataEventType.value, with: { (snapshot) in
                         if snapshot.exists() {
-                            self.performSegue(withIdentifier: "LoggedIn", sender: self)
+                            self.performSegue(withIdentifier: "SignedUp", sender: self)
                         }
                     })
                     

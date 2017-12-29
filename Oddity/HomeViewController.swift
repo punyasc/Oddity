@@ -37,6 +37,10 @@ class HomeViewController: UIViewController, UITextViewDelegate {
         setColors()
         cardWrapper.animate()
         unreadCard.isHidden = true
+        print("Token:", Messaging.messaging().fcmToken ?? "")
+        let token:String = Messaging.messaging().fcmToken ?? ""
+        let childUpdates = ["/users/\(Auth.auth().currentUser!.uid)/notificationTokens/\(token)":true]
+        ref.updateChildValues(childUpdates)
         setUnreadListener()
     }
     
@@ -188,7 +192,7 @@ class HomeViewController: UIViewController, UITextViewDelegate {
             self.ref.updateChildValues(childUpdates)
             
             let statusRef = self.ref.child("matches").child(mid).child("status")
-            statusRef.observe(DataEventType.value, with: { (snapshot) in
+            statusRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 let stat = snapshot.value as? Int ?? -1
                 if stat >= 0 {
                     self.chosenMid = mid

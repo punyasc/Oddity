@@ -51,7 +51,8 @@ class OddsMasterViewController: UIViewController {
         self.view.backgroundColor = UIColor(gradientStyle:UIGradientStyle.topToBottom, withFrame:view.frame, andColors:[UIColor.Primary.bgGradTop, UIColor.Primary.bgGradBot])
         navigationItem.titleView = playersView
         navigationItem.leftBarButtonItem?.title = ""
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-cancel-72"), style: .plain, target: self, action: #selector(OddsMasterViewController.dismissModal))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-down-button-filled-72"), style: .plain, target: self, action: #selector(OddsMasterViewController.dismissModal))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-trash-72"), style: .plain, target: self, action: #selector(OddsMasterViewController.deleteOdds))
         navigationController?.navigationBar.backgroundColor = .clear
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -62,6 +63,27 @@ class OddsMasterViewController: UIViewController {
     
     @objc func dismissModal() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func deleteOdds() {
+        let alert = UIAlertController(title: "Remove this match?", message: "Note: The other user will still be able to see this match.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.destructive, handler: { action in
+            self.confirmedOddsDelete()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { action in
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func confirmedOddsDelete() {
+        let childUpdates = ["users/\(Auth.auth().currentUser?.uid ?? "?")/matches/\(mid ?? "?")/":nil] as [String : Any?]
+        ref.updateChildValues(childUpdates, withCompletionBlock: { (error, ref) in
+            if error == nil {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                self.showAlert(title: "Error deleting", message: "Could not remove this match", theme: .error)
+            }
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {

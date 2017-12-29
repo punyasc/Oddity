@@ -31,10 +31,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryd-ZL-aXz" userLabel="Card Wrapper" customClass="SpringView" customModule="Spring">
-                                <rect key="frame" x="30" y="94" width="260" height="293"/>
+                                <rect key="frame" x="30" y="94" width="260" height="309"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIh-cq-yaG" customClass="RoundedView" customModule="Oddity" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="260" height="293"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="309"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WHAT ARE THE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ebj-Pa-j29">
                                                 <rect key="frame" x="30" y="64" width="200" height="45"/>
@@ -55,7 +55,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zn3-sS-k7N" customClass="RoundButton" customModule="Oddity" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="233" width="260" height="60"/>
+                                                <rect key="frame" x="0.0" y="249" width="260" height="60"/>
                                                 <color key="backgroundColor" red="0.71764705882352942" green="0.61176470588235299" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="fAl-0Z-Ht4"/>
@@ -76,7 +76,7 @@
                                                 </connections>
                                             </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qt0-6A-LaF" customClass="UITextViewFixed" customModule="Oddity" customModuleProvider="target">
-                                                <rect key="frame" x="30" y="189" width="200" height="24"/>
+                                                <rect key="frame" x="30" y="189" width="200" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="0.13725490196078433" green="0.3411764705882353" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -106,7 +106,7 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                             </textField>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Vnc-L2-Win">
-                                                <rect key="frame" x="112" y="128.5" width="37" height="37"/>
+                                                <rect key="frame" x="112" y="136.5" width="37" height="37"/>
                                                 <color key="color" name="TritoneBlue"/>
                                             </activityIndicatorView>
                                         </subviews>
@@ -187,7 +187,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cde-gM-HMh" userLabel="Unread Wrapper" customClass="SpringView" customModule="Spring">
-                                <rect key="frame" x="30" y="417" width="260" height="120"/>
+                                <rect key="frame" x="30" y="433" width="260" height="120"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HNg-qe-CWT" customClass="RoundedView" customModule="Oddity" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="260" height="120"/>
@@ -684,9 +684,6 @@
         <image name="icons8-email-72" width="24" height="24"/>
         <image name="icons8-exit-72" width="24" height="24"/>
         <image name="icons8-trash-72" width="24" height="24"/>
-        <namedColor name="TritoneBlue">
-            <color red="0.33700001239776611" green="0.70200002193450928" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="TritoneBlue">
             <color red="0.33700001239776611" green="0.70200002193450928" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

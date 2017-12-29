@@ -40,6 +40,7 @@
 		B5C0A3F01FEF7D8A006C7F40 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A3EF1FEF7D8A006C7F40 /* ProfileTableViewController.swift */; };
 		B5C0A3F21FEF7D9A006C7F40 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C0A3F11FEF7D9A006C7F40 /* ProfileViewController.swift */; };
 		B5E233BB1FEF0ED4007F3E10 /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E233BA1FEF0ED4007F3E10 /* PagesViewController.swift */; };
+		B5E361201FF613A500ECF0A1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3611F1FF613A500ECF0A1 /* Reachability.swift */; };
 		DA396C55B89D53B72D462802 /* Pods_Oddity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D7B9A9FAA3F8EE7D32EA8D /* Pods_Oddity.framework */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +105,8 @@
 		B5C0A3EF1FEF7D8A006C7F40 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		B5C0A3F11FEF7D9A006C7F40 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B5E233BA1FEF0ED4007F3E10 /* PagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
+		B5E3611E1FF5BE6E00ECF0A1 /* Oddity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Oddity.entitlements; sourceTree = "<group>"; };
+		B5E3611F1FF613A500ECF0A1 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		B97CFFFB489F2A43F140DC42 /* Pods_OddityTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OddityTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD9CEFBFA1F963C05256E8B /* Pods_OddityUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OddityUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -172,6 +175,7 @@
 		B59196741FE4A00A00ECC5EE /* Oddity */ = {
 			isa = PBXGroup;
 			children = (
+				B5E3611E1FF5BE6E00ECF0A1 /* Oddity.entitlements */,
 				B5780C271FF0433F00694FB8 /* ColorThemes.swift */,
 				B59196751FE4A00A00ECC5EE /* AppDelegate.swift */,
 				B5780C291FF1DD5F00694FB8 /* WelcomeViewController.swift */,
@@ -193,6 +197,7 @@
 				B56AE5061FEC97BF0004E965 /* OddsLimitViewController.swift */,
 				B56AE5041FEC978E0004E965 /* OddsWaitingViewController.swift */,
 				B56AE5021FEC976B0004E965 /* OddsMasterViewController.swift */,
+				B5E3611F1FF613A500ECF0A1 /* Reachability.swift */,
 				B59196A71FE9A46800ECC5EE /* HomeViewController.swift */,
 				B59196AB1FEB1D0A00ECC5EE /* OddsDetailViewController.swift */,
 				B59196A91FEB0F3900ECC5EE /* RoundButton.swift */,
@@ -314,6 +319,14 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					B59196851FE4A00A00ECC5EE = {
 						CreatedOnToolsVersion = 9.0;
@@ -540,6 +553,7 @@
 				B5C0A3F01FEF7D8A006C7F40 /* ProfileTableViewController.swift in Sources */,
 				B59196AC1FEB1D0A00ECC5EE /* OddsDetailViewController.swift in Sources */,
 				B55294A71FF24E770060E2FA /* HistoryTableViewCell.swift in Sources */,
+				B5E361201FF613A500ECF0A1 /* Reachability.swift in Sources */,
 				B5A934761FEDB288000DA99D /* HistoryTableViewController.swift in Sources */,
 				B56AE5031FEC976B0004E965 /* OddsMasterViewController.swift in Sources */,
 				B59196A81FE9A46800ECC5EE /* HomeViewController.swift in Sources */,
@@ -718,6 +732,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Oddity/Oddity.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UZV9JB2U7V;
 				INFOPLIST_FILE = Oddity/Info.plist;
@@ -738,6 +753,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Oddity/Oddity.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UZV9JB2U7V;
 				INFOPLIST_FILE = Oddity/Info.plist;

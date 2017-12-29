@@ -120,6 +120,7 @@ extension PagesViewController: UIPageViewControllerDataSource, UIPageViewControl
                 navigationItem.rightBarButtonItem = nil */
                 navigationItem.leftBarButtonItem?.tintColor = .black
                 navigationItem.titleView?.alpha = 1.0
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-time-machine-72-2"), style: .plain, target: self, action: #selector(PagesViewController.jumpToHistory))
                 navigationItem.rightBarButtonItem?.tintColor = .lightGray
             default:
                 navigationItem.title = "Oddity"
@@ -153,6 +154,15 @@ extension PagesViewController: UIPageViewControllerDataSource, UIPageViewControl
                            animated: true,
                            completion: nil)
         updateNavItem()
+    }
+    
+    @objc func notifyHistory() {
+        if let vc = self.viewControllers?[0] {
+            if vc != orderedViewControllers[2] {
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-time-notif"), style: .plain, target: self, action: #selector(PagesViewController.jumpToHistory))
+            }
+        }
+        
     }
     
     

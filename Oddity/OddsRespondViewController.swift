@@ -35,7 +35,9 @@ class OddsRespondViewController: UIViewController {
     }
     
     @IBAction func randomPress(_ sender: Any) {
-        let num = Int(arc4random_uniform(42) + 1)
+        let limit = UInt32(limitLabel.text ?? "0") ?? 0
+        let num = Int(arc4random_uniform(limit) + 1)
+        mynumField.text = "\(num)"
     }
     
     
